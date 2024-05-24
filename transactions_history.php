@@ -39,8 +39,8 @@ $conn->close();
         }
 
         .container {
-            width: 80%;
-            max-width: 600px;
+            width:300px;
+            border-radius: 30px;
             padding: 20px;
             overflow-y: auto; /* Enable vertical scrolling */
             background-color: #FFFFFF5E;

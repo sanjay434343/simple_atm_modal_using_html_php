@@ -1,4 +1,4 @@
-    <?php
+<?php
     include 'db_connection.php'; // Include database connection file
 
     $error_message = "";
@@ -39,8 +39,7 @@
     }
 
     $conn->close();
-    ?>
-   <!DOCTYPE html>
+    ?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -64,7 +63,6 @@
 
         .container {
             width: 300px;
-       
             position: relative;
             bottom: 80px;
         }
@@ -107,7 +105,6 @@
             bottom: -20px;
             margin-left: 25px;
             color: #656262;
-            
         }
 
         .message-container {
@@ -136,30 +133,27 @@
     <!-- Withdrawal form -->
     <div class="container">
         <h1>ATM Withdrawal</h1>
-        <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
-        <div class="form-group">
-            
-    <!-- Error message -->
-    <?php if (!empty($error_message)): ?>
-        <div class="message-container">
-            <div class="error-message"><?php echo $error_message; ?></div>
-        </div>
-    <?php endif; ?>
+        <form id="withdrawalForm" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST">
+            <!-- Error message -->
+            <?php if (!empty($error_message)): ?>
+                <div class="message-container">
+                    <div class="error-message"><?php echo $error_message; ?></div>
+                </div>
+            <?php endif; ?>
 
-    <!-- Success message -->
-    <?php if (!empty($success_message)): ?>
-        <div class="message-container">
-            <div class="success-message"><?php echo $success_message; ?></div>
-        </div>
-    <?php endif; ?>
+            <!-- Success message -->
+            <?php if (!empty($success_message)): ?>
+                <div class="message-container">
+                    <div class="success-message"><?php echo $success_message; ?></div>
+                </div>
+            <?php endif; ?>
 
-    <!-- Balance message -->
-    <?php if (!empty($balance_message)): ?>
-        <div class="message-container">
-            <div class="balance-message"><?php echo $balance_message; ?></div>
-        </div>
-    <?php endif; ?>
-            </div>
+            <!-- Balance message -->
+            <?php if (!empty($balance_message)): ?>
+                <div class="message-container">
+                    <div class="balance-message"><?php echo $balance_message; ?></div>
+                </div>
+            <?php endif; ?>
 
             <div class="form-group">
                 <input type="text" id="username" name="username" placeholder="Username" required>
@@ -174,5 +168,30 @@
         </form>
     </div>
 
+    <audio id="clickSound" src="atm/beep2.mp3" preload="auto"></audio>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const clickSound = document.getElementById('clickSound');
+            const withdrawalForm = document.getElementById('withdrawalForm');
+            const submitButton = withdrawalForm.querySelector('button[type="submit"]');
+
+            function playSound(event) {
+                event.preventDefault(); // Prevent the form from submitting immediately
+                clickSound.currentTime = 0; // Rewind to the start
+                clickSound.play().catch(function(error) {
+                    console.log('Playback prevented: ' + error);
+                });
+
+                // Delay form submission to allow sound to play
+                setTimeout(function() {
+                    withdrawalForm.submit();
+                }, 500); // 500 milliseconds = 0.5 seconds delay
+            }
+
+            // Add click event listener to the submit button
+            submitButton.addEventListener('click', playSound);
+        });
+    </script>
 </body>
 </html>

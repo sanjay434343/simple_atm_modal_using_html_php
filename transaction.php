@@ -76,37 +76,74 @@
         button:hover {
             background-color: #0056b3;
         }
+
+        .message-container {
+            width: 100%;
+            padding: 10px;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .error-message {
+            color: red;
+        }
+
+        .success-message {
+            color: green;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h2>Transaction</h2>
         <form id="transactionForm">
-            <div>
-              
+            <div class="form-group">
                 <input type="text" id="username" name="username" placeholder="Username" required>
             </div>
-            <div>
-             
+            <div class="form-group">
                 <input type="password" id="password" name="password" placeholder="PIN" required>
             </div>
-            <div>
-               
+            <div class="form-group">
                 <input type="text" id="recipient_username" name="recipient_username" placeholder="Recipient Name" required>
             </div>
-            <div>
-            
+            <div class="form-group">
                 <input type="number" id="amount" name="amount" placeholder="Amount" required>
             </div>
-            <div>
-
-                <input  type="text"    id="description" name="description" rows="3" placeholder="Purpos Of sending Money (optional)">
+            <div class="form-group">
+                <input type="text" id="description" name="description" placeholder="Purpose of sending money (optional)">
             </div>
             <button type="submit">Submit</button>
         </form>
-    </div>
+        <div class="message-container">
+            <div class="error-message" style="display: none;"></div>
+            <div class="success-message" style="display: none;"></div>
+        </div>
+    </div>  
+
+    <audio id="clickSound" src="atm/beep2.mp3" preload="auto"></audio>
 
     <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const clickSound = document.getElementById('clickSound');
+            const transactionForm = document.getElementById('transactionForm');
+            const submitButton = transactionForm.querySelector('button[type="submit"]');
+
+            function playSound(event) {
+                event.preventDefault(); // Prevent the form from submitting immediately
+                clickSound.currentTime = 0; // Rewind to the start
+                clickSound.play().catch(function(error) {
+                    console.log('Playback prevented: ' + error);
+                });
+
+                // Delay form submission to allow sound to play
+                setTimeout(function() {
+                    transactionForm.submit();
+                }, 500); // 500 milliseconds = 0.5 seconds delay
+            }
+
+            submitButton.addEventListener('click', playSound);
+        });
+
         document.addEventListener("DOMContentLoaded", function() {
             const transactionForm = document.getElementById("transactionForm");
 
@@ -117,8 +154,21 @@
                 const xhr = new XMLHttpRequest();
 
                 xhr.onload = function() {
+                    const errorMessage = document.querySelector('.error-message');
+                    const successMessage = document.querySelector('.success-message');
+
                     if (xhr.status === 200) {
-                        alert("Transaction successful!");
+                        const response = JSON.parse(xhr.responseText);
+
+                        if (response.success) {
+                            successMessage.textContent = response.message;
+                            successMessage.style.display = 'block';
+                            errorMessage.style.display = 'none';
+                        } else {
+                            errorMessage.textContent = response.message;
+                            errorMessage.style.display = 'block';
+                            successMessage.style.display = 'none';
+                        }
                     } else {
                         alert("Error: " + xhr.statusText);
                     }
@@ -128,7 +178,7 @@
                     alert("Request failed.");
                 };
 
-                xhr.open("POST", "process_transaction.php"); // Replace "process_transaction.php" with the URL of your PHP script
+                xhr.open("POST", "process_transaction.php");
                 xhr.send(formData);
             });
         });
