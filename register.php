@@ -8,7 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $servername = "localhost";
         $username_db = "root";
         $password_db = "";
-        $dbname = "atm";
+        $dbname = "atm_database";
 
         // Create connection
         $conn = new mysqli($servername, $username_db, $password_db, $dbname);

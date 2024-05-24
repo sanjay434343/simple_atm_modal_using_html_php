@@ -18,7 +18,7 @@
             align-items: center;
             background-position: center;
             background-repeat: no-repeat;
-            background-size: 600px;
+            background-size: 550px;
             justify-content: center;
             height: 100vh;
         }
