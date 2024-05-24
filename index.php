@@ -26,7 +26,7 @@
 
         .form-container {
             position: absolute;
-            top: 200px;
+            top: 180px;
         }
 
         h1 {
@@ -79,6 +79,11 @@
             margin-top: 10px;
             font-size: 14px;
         }
+
+        .register{
+            margin-top: 50px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -92,7 +97,8 @@
                 <div class="input-group">
                     <input type="password" id="pin" name="pin" placeholder="PIN" required>
                 </div>
-                <button type="button" id="loginButton">Login</button>
+                <button type="button" id="loginButton">Login</button><br>
+                <a href="register_home.php" class="register">Register here</a>
                 <audio id="clickSound" src="atm/beep2.mp3" preload="auto"></audio>
                 <p id="message" class="message"></p>
             </form>
