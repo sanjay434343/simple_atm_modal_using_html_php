@@ -54,7 +54,7 @@
             background-image: url(atm/machine.jpg);
             background-position: center;
             background-repeat: no-repeat;
-            background-size: 600px;
+            background-size: 550px;
             display: flex;
             justify-content: center;
             align-items: center;

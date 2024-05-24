@@ -30,7 +30,7 @@ $conn->close();
             background-image: url(atm/machine.jpg);
             background-position: center;
             background-repeat: no-repeat;
-            background-size: 600px;
+            background-size: 550px;
             height: 100vh;
             overflow: hidden;
             display: flex;
@@ -43,12 +43,12 @@ $conn->close();
             border-radius: 30px;
             padding: 20px;
             overflow-y: auto; /* Enable vertical scrolling */
-            background-color: #FFFFFF5E;
+            background-color: #FFFFFF00;
             color: #706E6E;
             max-height: 30%;
             border: none;
             position: relative;
-            bottom: 60px;
+            bottom: 55px;
         }
 
         .transaction {

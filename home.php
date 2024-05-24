@@ -58,7 +58,7 @@ $conn->close();
             margin-top: 40px;
             color: #333;
             position: relative;
-            bottom: 90px;
+            bottom: 80px;
         }
         .form-container {
             border-radius: 5px;
@@ -70,7 +70,7 @@ $conn->close();
             align-items: center;
             background-position: center;
             background-repeat: no-repeat;
-            background-size: 600px;
+            background-size: 550px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -88,9 +88,10 @@ $conn->close();
         a {
             display: block;
             position: relative;
-            bottom: 55px;
+            bottom: 50px;
+            border: 1px solid #ccc;
             margin-left: 10px;
-            padding: 10px 15px;
+            padding: 8px 15px;
             background-color: #F9FAFB46;
             color: #7F7F7F;
             text-decoration: none;

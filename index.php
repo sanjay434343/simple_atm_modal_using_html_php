@@ -8,18 +8,19 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #fafafa;
+            background-color: #474444;
             margin: 0;
             padding: 0;
         }
 
         .login-container {
             display: flex;
+            background-color: #474444;
             background-image: url(atm/machine.jpg);
             align-items: center;
             background-position: center;
             background-repeat: no-repeat;
-            background-size: 600px;
+            background-size: 550px;
             justify-content: center;
             height: 100vh;
         }
