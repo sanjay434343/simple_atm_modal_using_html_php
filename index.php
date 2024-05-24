@@ -21,7 +21,6 @@
             background-repeat: no-repeat;
             background-size: 600px;
             justify-content: center;
-            align-items: center;
             height: 100vh;
         }
 
@@ -55,7 +54,6 @@
         input[type="password"] {
             width: 300px;
             padding: 10px;
-            margin-right: 1px;
             border: 1px solid #dbdbdb;
             background-color: #FFFFFF44;
             border-radius: 3px;
@@ -94,13 +92,15 @@
                 <div class="input-group">
                     <input type="password" id="pin" name="pin" placeholder="PIN" required>
                 </div>
-                <button type="button" onclick="authenticateUser()">Login</button>
+                <button type="button" id="loginButton">Login</button>
+                <audio id="clickSound" src="atm/beep2.mp3" preload="auto"></audio>
                 <p id="message" class="message"></p>
             </form>
         </div>
     </div>
 
     <script>
+        // Function to authenticate user
         function authenticateUser() {
             var username = document.getElementById("username").value;
             var pin = document.getElementById("pin").value;
@@ -121,6 +121,17 @@
             xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
             xhr.send("username=" + username + "&pin=" + pin);
         }
+
+        // Add event listener to the button to play sound on each click
+        document.getElementById('loginButton').addEventListener('click', function() {
+            // Play the click sound
+            var clickSound = document.getElementById('clickSound');
+            clickSound.currentTime = 0; // Rewind to the start
+            clickSound.play();
+
+            // Authenticate user
+            authenticateUser();
+        });
     </script>
 </body>
 </html>
